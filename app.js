@@ -9,6 +9,20 @@ const morganMiddleware = require('./morganMiddleware');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const multer = require('multer');
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, 'uploads/');
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024},
+});
 
 var app = express();
 
@@ -41,6 +55,9 @@ app.use(session({  // 2
   store: new FileStore() // 세션을 파일로 저장
 }));
 
+
+
+
 app.use((req, res, next) => {
   if(process.env.NODE_ENV === 'production') {
     logger('combined')(req, res, next);
@@ -49,6 +66,12 @@ app.use((req, res, next) => {
   }
 });
 app.use(morganMiddleware)
+
+app.post('/upload', upload.fields([{name : 'image1'}, {name : 'image2'}]),
+    (req, res) => {
+  console.log(req.files, req.body);
+  res.send('ok');
+});
 
 
 app.use('/', indexRouter); // 미들웨어 ㅇㅇ  index.js에 있는 라우터 읽음/
@@ -70,5 +93,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
