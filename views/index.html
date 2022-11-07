@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/stylesheets/style1.css">
+</head>
+<body>
+{{title}}
+<br>
+{% include 'header.html' %}
+{% include 'navi.html' %}
+{% include 'body.html' %}
+<!-- {% block content %}
+{% endblock %} ,, layout.html에서 모아놓고 써야할듯,, !-->
+
+{% include 'footer.html' %}
+
+<!--    {% set node = 'node.js' %}-->
+<!--{% set js = 'javascript' %}-->
+<!--지금 수업은 {{node}}를 하고 확장자는 {{js}}이다.-->
+
+
+</body>
+</html>
