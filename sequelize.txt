@@ -1,0 +1,31 @@
+티스토리 주소 :
+https://velog.io/@usaindream/Sequelize-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC1%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EC%9E%A1%EA%B8%B0
+
+
+튜토리얼#5.
+
+major 컬럼 만들기 단계 중에서....
+migration 파일 생성 후 up 메소드 채워주기 다음에 migrate하기 명령어 :
+npx sequelize db:migrate --env 'production' 실행해야함
+
+
+특정 파일 undo하기 :
+ npx sequelize db:migrate:undo --env 'production' --name 20221109023115-student\(add_major_column\).js * 파일명에 () 들어있으면 \ 넣어주기
+-> 이때 파일은 삭제되지 않기 때문에 다시 major 컬럼을 생성하는 명령어를 migrate 하면 컬럼이 생성된다.
+
+
+튜토리얼#6.
+https://velog.io/@usaindream/Sequelize-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC5%EC%B4%88%EA%B8%B0-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%82%BD%EC%9E%85
+seed는 가짜 데이터 만들어주는거
+
+
+튜터리얼#7.
+ npx sequelize seed:generate --name Student --env 'production'
+-> seeders 폴더에 파일 생성됨.
+-> app.js 에서 데이터 넣는것처럼 데이터 여기에 넣으면된다
+
+-> 데이터 입력 후
+npx sequelize db:seed --seed 20221109032428-Student.js --env 'production'
+명령어 실행
+
+
