@@ -25,7 +25,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      professer_ID: {
+        reference: {
+          model: 'Professors',
+          key: 'id'
+        },
+        type: Sequelize.INTEGER,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

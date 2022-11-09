@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Course.belongsTo(models.Professor);
+      Course.belongsToMany(models.Student, { through: models.Grade });
     }
   }
   Course.init({

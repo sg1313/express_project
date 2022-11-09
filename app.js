@@ -7,7 +7,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session); // 1 파일로 저장해주기 위해 넣어주
 const morganMiddleware = require('./morganMiddleware');
 const nunjucks = require('nunjucks');
-const {sequelize} = require('./models');
+// const {sequelize} = require('./models');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -48,13 +48,20 @@ nunjucks.configure('views', {
   watch: true,
 });
 
-sequelize.sync({force : false}) // true로 하면 실행할때마다 db 생성
-    .then(() => {
-      console.log('데이터베이스 연결 성공');
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+// sequelize.sync({force : true }) // true로 하면 실행할때마다 db 생성
+//     .then(() => {
+//       console.log('데이터베이스 연결 성공');
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     })
+
+const db = require('./models/index.js');
+const sequelize = db.sequelize;
+(async () => {
+  await sequelize.sync({ force: false });
+})()
+
 
 app.use(logger('dev'));
 app.use(express.json());
